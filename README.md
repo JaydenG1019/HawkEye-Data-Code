@@ -6,12 +6,6 @@
 - Please submit issues to our [GitHub](https://github.com/JaydenG1019/HawkEye-Synthesizer) if you found any bugs or have any suggestions
 - For anything else, send an email at jguan8@illinois.edu
 
-## Directory Structure
-    .
-    ├── docs     
-    
-    
-    
 ## Citation
 
 Please cite OpenRadar in your publications if it helps your research. Here is an example BibTeX entry:
