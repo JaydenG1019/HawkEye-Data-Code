@@ -10,11 +10,13 @@ for k_rotate_ang_fine = rotate_ang_fine
 end
 rotate_ang = sort(rotate_ang);
 
-% inline function for 2D rotation
-rotate2d =  @(x, M) (x(:, 1:2) * M);
+translate_lim = [-4000, 4000; 3500, 12000]; % limits of the translation along the x and y axis
+translate_x_res = 500; % resolution of translation along the x axis unit: mm
+translate_y_res = 500; % resolution of translation along the y axis unit: mm
 
 % structure of point cloud and information of the car CAD model
 car_v_struct = struct('cart_v',[], ... % cartesian coordinates vector
+                'sph_v',[], ... % spherical coordinates vector
                 'N_pt',0, ... % # of points in the model
                 'bbox',[], ... % bounding box of the car 
                 'lim',[], ... % min and max xyz coordinates
@@ -22,9 +24,4 @@ car_v_struct = struct('cart_v',[], ... % cartesian coordinates vector
                 'rotate',[], ... % degree rotated
                 'translate',[]); % distance translated
 
-variable_library_radar;
-
-signal_path = '../results/signal/test'; % path to save the built scenes
-heatmap_path = '../results/heatmap/test'; % path to save the built scenes
-GT_path = '../results/ground_truth/test'; % path to save the built scenes
 

@@ -11,12 +11,12 @@ function radar_heatmap = radar_dsp(signal_array)
     %% Angle of Arrival Estimation
     radar_heatmap = zeros(N_rho,N_phi*N_theta);
 
-    x_idx = reshape(ary_x_idx,1,[]);
-    z_idx = reshape(ary_z_idx,1,1,[]);
+    x_idx = reshape(array_x_idx,1,[]);
+    z_idx = reshape(array_z_idx,1,1,[]);
 
     for kp = 1:N_phi
         for kt = 1:N_theta
-            Vec = exp(1j*(2*pi*(ary_stp(1)*x_idx* cos(phi(kp)) * sin(theta(kt)) + ary_stp(2)*z_idx*cos(theta(kt)))/lambda));
+            Vec = exp(1j*(2*pi*(array_gap(1)*x_idx* cos(phi(kp)) * sin(theta(kt)) + array_gap(2)*z_idx*cos(theta(kt)))/lambda));
             VecR = repmat(Vec,N_rho,1);
             radar_heatmap(:,kp,kt) = sum(range_FFT_array.*VecR,[2,3]);
         end
