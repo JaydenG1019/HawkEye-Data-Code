@@ -1,7 +1,7 @@
 # HawkEye Dataset & Radar Data Synthesizer
 3D Millimteer-wave radar heatmap dataset of cars collected using our custom-built radar data collection platform.
 Matlab implementation of our radar data synthesizer.
-<br>
+<br><br>
 [Through Fog High Resolution Imaging Using Millimeter Wave Radar](https://jaydeng1019.github.io/HawkEye/)  
 Junfeng Guan, Sohrab Madani, Suraj Jog, Saurabh Gupta, Haitham Hassanieh
 In [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Guan_Through_Fog_High-Resolution_Imaging_Using_Millimeter_Wave_Radar_CVPR_2020_paper.html).  
