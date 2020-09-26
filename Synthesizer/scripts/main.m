@@ -29,10 +29,17 @@ function [radar_heatmap, visible_cart_v] = main
         
         % load the surface model
         load(sprintf('../CAD/CAD_model_%d.mat',CAD_idx));
-        
         % CAD models are loaded as point clouds of size N_pt by 3, where N_pt
         % is the number of points and 3 values are the cartesian coordinates
         % unit is mm
+        
+        % Visulize the rotated and translated point cloud
+%         figure; 
+%         cart_v_plot = cart_v;
+% %         cart_v_plot = datasample(cart_v, 1000); % downsampling when plotting
+%         scatter3(cart_v_plot(:,1),cart_v_plot(:,2),cart_v_plot(:,3),10,'filled','k'); hold on;
+%         xlabel('x (mm)'); ylabel('y (mm)'); zlabel('z (mm)'); axis equal;
+%         set(gca,'FontSize',30) % Creates an axes and sets its FontSize to 18
 
         % store point cloud in pc (point cloud) structure
         car_v = car_v_struct;
@@ -80,12 +87,15 @@ function [radar_heatmap, visible_cart_v] = main
             car_scene_v.bbox = car_scene_v.bbox/1000; 
 
 %             % Visulize the rotated and translated point cloud
-%             figure; 
-%             cart_v_plot = datasample(car_scene_v.cart_v, 1000); % downsampling when plotting
-%             scatter3(cart_v_plot(:,1),cart_v_plot(:,2),cart_v_plot(:,3)); hold on;
-%             scatter3(car_scene_v.bbox(:,1), car_scene_v.bbox(:,2),car_scene_v.bbox(:,3)); hold on;
-%             axis equal;
-            
+            figure; 
+            cart_v_plot = car_scene_v.cart_v; % downsampling when plotting
+            scatter3(cart_v_plot(:,1),cart_v_plot(:,2),cart_v_plot(:,3),10,'filled','k'); hold on;
+            scatter3(car_scene_v.bbox(:,1), car_scene_v.bbox(:,2),car_scene_v.bbox(:,3),'r'); hold on;
+            xlabel('x (m)'); ylabel('y (m)'); zlabel('z (m)'); axis equal;
+            xlim([-3 3]);
+            ylim([0 12]);
+            set(gca,'FontSize',30) % Creates an axes and sets its FontSize to 18
+
             %% Modle radar point reflectors in the scene
             [visible_cart_v] = remove_occlusion(car_scene_v); % remove occluded body of the car
             try
@@ -98,16 +108,39 @@ function [radar_heatmap, visible_cart_v] = main
                 continue;
             end
             
-%             % Visulize the radar point reflectors
-%             figure;
-%             scatter3(reflector_cart_v(:,1),reflector_cart_v(:,2),reflector_cart_v(:,3));
-%             title('Radar point reflectors');
+            % Visulize the radar point reflectors
+            figure; 
+            cart_v_plot = reflector_cart_v; % downsampling when plotting
+            scatter3(cart_v_plot(:,1),cart_v_plot(:,2),cart_v_plot(:,3),10,'filled','k'); hold on;
+            xlabel('x (m)'); ylabel('y (m)'); zlabel('z (m)'); axis equal;
+            xlim([-3 3]);
+            ylim([0 12]);
+            set(gca,'FontSize',30) % Creates an axes and sets its FontSize to 18
 
             %% Simualte received radar signal in the receiver antenna array            
             signal_array = simulate_radar_signal(reflector_cart_v);
             
             %% Radar signal processing, generating 3D radar heatmaps
             radar_heatmap = radar_dsp(signal_array);
+
+            % Visulize the radar heatmap top view
+            radar_heatmap_top = squeeze(max(radar_heatmap,[],3));
+            figure
+            imagesc(radar_heatmap_top);    
+            set(gca,'XDir','reverse')
+            set(gca,'YDir','normal')
+            colormap jet; caxis([0 1e6]);
+            xlabel('Range'); ylabel('Azimuth');
+            set(gca,'FontSize',30) % Creates an axes and sets its FontSize to 18
+            
+            % Visulize the radar heatmap front view
+            radar_heatmap_front = squeeze(max(radar_heatmap,[],1));
+            figure;
+            imagesc(radar_heatmap_front.');    
+            set(gca,'XDir','reverse')
+            colormap jet; caxis([0 1e6]);
+            xlabel('Azimuth'); ylabel('Elevation');
+            set(gca,'FontSize',30) % Creates an axes and sets its FontSize to 18
         end
     end
 end
