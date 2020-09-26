@@ -1,9 +1,9 @@
 # HawkEye Datasetand Radar Data Synthesizer
 
-## Contact
-
-- Please submit issues to our [GitHub](https://github.com/JaydenG1019/HawkEye-Synthesizer) if you found any bugs or have any suggestions
-- For anything else, send an email at jguan8@illinois.edu
+<br><br>
+[Through Fog High Resolution Imaging Using Millimeter Wave Radar](https://jaydeng1019.github.io/HawkEye/)  
+Junfeng Guan, Sohrab Madani, Suraj Jog, Saurabh Gupta, Haitham Hassanieh
+In [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Guan_Through_Fog_High-Resolution_Imaging_Using_Millimeter_Wave_Radar_CVPR_2020_paper.html).  
 
 ## Directory Structure
     .
@@ -26,6 +26,13 @@
         ├── variable_library_radar.m    # radar configuration related variables
       ├── COPYRIGHT.txt
     ├── README.md
+
+
+## Contact
+
+    - Please submit issues to our [GitHub](https://github.com/JaydenG1019/HawkEye-Synthesizer) if you found any bugs or have any suggestions
+    - For anything else, send an email at jguan8@illinois.edu
+
 
 ## Citation
 
