@@ -1,4 +1,4 @@
-function [sph_pwr, visible_sph_v] = main
+function [sph_pwr, visible_cart_v] = main
     % Copyright (c) 2018-2020 Junfeng Guan, Sohrab Madani, Suraj Jog, Saurabh Gupta, 
     % Haitham Hassanieh, University of Illinois at Urbana-Champaign
     % 
@@ -48,11 +48,12 @@ function [sph_pwr, visible_sph_v] = main
         for ks = 1:N_placement_car
             car_scene_v = car1_v_origin;
 
-            %% Rotate        
+            %% Rotate     
             car_scene_v.rotate = rotate_ang(randi(length(rotate_ang))); % randomly select a rotation angle and store it in the pc structure
-            rotate_m_c1 = rotation_matrix(car_scene_v.rotate/180*pi); % create rotation matrix
-            car_scene_v.cart_v(:,1:2) = rotate2d(car_scene_v.cart_v, rotate_m_c1); % rotate the point cloud 
-            car_scene_v.bbox(:,1:2) = rotate2d(car_scene_v.bbox, rotate_m_c1); % rotate the bounding box
+            rotate_angle_rad = car_scene_v.rotate/180*pi;
+            rotation_matrix = [cos(rotate_angle_rad), -sin(rotate_angle_rad); sin(rotate_angle_rad), cos(rotate_angle_rad)]; % create rotation matrix
+            car_scene_v.cart_v(:,1:2) = rotate2d(car_scene_v.cart_v, rotation_matrix); % rotate the point cloud 
+            car_scene_v.bbox(:,1:2) = rotate2d(car_scene_v.bbox, rotation_matrix); % rotate the bounding box
             car_scene_v.lim = [min(car_scene_v.cart_v);max(car_scene_v.cart_v)]; % update the limits in all three dimensions
 
             %% Translation
@@ -90,6 +91,11 @@ function [sph_pwr, visible_sph_v] = main
             if isempty(reflector_cart_v)
                 continue;
             end
+            
+%             % Visulize the radar point reflectors
+%             figure;
+%             scatter3(reflector_cart_v(:,1),reflector_cart_v(:,2),reflector_cart_v(:,3));
+%             title('Radar point reflectors');
 
             %% Simualte received radar signal in the receiver antenna array            
             signal_array = simulate_radar_signal(reflector_cart_v);

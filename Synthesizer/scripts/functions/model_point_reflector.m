@@ -3,11 +3,17 @@ function blb_cart_v = model_point_reflector(visible_cart_v,bbox)
 % Input: 'visible_cart_v': point cloud of the visible body of the car (cartesian coordinates) 
 %        'bbox': bounding box of the car
 % Output: 'blb_cart_v': blobs of radar point reflectos
+
+    % local function find the distance from a point pt to a line determined by 2 points v1 and v2
+    function d = point_to_line(pt, v1, v2)
+          a = [v1 - v2,0];
+          b = [pt - v2,0];
+          d = norm(cross(a,b)) / norm(a);
+    end
     
     %% Blobs center
     blb_ctr_cart = []; % 
-    cart_v_car = visible_cart_v(visible_cart_v(:,4)==kc,:);
-    N_pt_car = length(cart_v_car);
+    N_pt_car = length(visible_cart_v);
     pt_specular = zeros(N_pt_car,1);
 
 %     box_close = sqrt((bbox(2:4,1)-bbox(1,1)).^2+(bbox(2:4,2)-bbox(1,2)).^2);
@@ -28,7 +34,7 @@ function blb_cart_v = model_point_reflector(visible_cart_v,bbox)
     % find the specularity for each point
     for kp = 1:N_pt_car
 
-        if min(sqrt((cart_v_car(kp,1)-bbox(1:4,1)).^2+(cart_v_car(kp,2)-bbox(1:4,2)).^2))<0.5
+        if min(sqrt((visible_cart_v(kp,1)-bbox(1:4,1)).^2+(visible_cart_v(kp,2)-bbox(1:4,2)).^2))<0.5
             % if the point is very close to a corner of the bounding box
             pt_specular(kp) = 0;
         else
@@ -36,14 +42,14 @@ function blb_cart_v = model_point_reflector(visible_cart_v,bbox)
             % find the nearest edge
             pt_edge_dist = zeros(4,1);
             for ke = 1:4
-                pt_edge_dist(ke) = point_to_line([cart_v_car(kp,1),cart_v_car(kp,2)], squeeze(bbox_edge_cart(ke,1,:)).', squeeze(bbox_edge_cart(ke,2,:)).');
+                pt_edge_dist(ke) = point_to_line([visible_cart_v(kp,1),visible_cart_v(kp,2)], squeeze(bbox_edge_cart(ke,1,:)).', squeeze(bbox_edge_cart(ke,2,:)).');
             end
             [~,edge_nearest] = min(pt_edge_dist);
             % find the angle between the insertion angle and angle of the nearest edge  
-            pt_specular(kp) = abs(angle(bbox_edge(edge_nearest)) - angle(cart_v_car(kp,1)+1j*cart_v_car(kp,2)));
+            pt_specular(kp) = abs(angle(bbox_edge(edge_nearest)) - angle(visible_cart_v(kp,1)+1j*visible_cart_v(kp,2)));
             pt_specular(kp) = abs(mod(pt_specular(kp),pi)/pi*180-90);
             % find the elevation angle theta
-            pt_theta = angle(sqrt(cart_v_car(kp,1)^2+cart_v_car(kp,2)^2)+1j*abs(cart_v_car(kp,3)));
+            pt_theta = angle(sqrt(visible_cart_v(kp,1)^2+visible_cart_v(kp,2)^2)+1j*abs(visible_cart_v(kp,3)));
             pt_theta = abs(mod(pt_theta,pi)/pi*180);
             % the larger one is the specularity of the point
             pt_specular(kp) = max(pt_specular(kp),pt_theta);
@@ -56,19 +62,19 @@ function blb_cart_v = model_point_reflector(visible_cart_v,bbox)
     blb_ctr_cart = [];
     if ~isempty(blb_ctr)
         blb_ctr_idx = datasample(blb_ctr,min(10,length(blb_ctr)));
-        blb_ctr_cart = [blb_ctr_cart;cart_v_car(blb_ctr_idx,:)];
+        blb_ctr_cart = [blb_ctr_cart;visible_cart_v(blb_ctr_idx,:)];
     end
 
     blb_ctr = find((pt_specular>0)&(pt_specular<15));
     if ~isempty(blb_ctr)
         blb_ctr_idx = datasample(blb_ctr,min(20,length(blb_ctr)));
-        blb_ctr_cart = [blb_ctr_cart;cart_v_car(blb_ctr_idx,:)];
+        blb_ctr_cart = [blb_ctr_cart;visible_cart_v(blb_ctr_idx,:)];
     end
 
     blb_ctr = find((pt_specular>15)&(pt_specular<25));
     if ~isempty(blb_ctr)
         blb_ctr_idx = datasample(blb_ctr,min(5,length(blb_ctr)));
-        blb_ctr_cart = [blb_ctr_cart;cart_v_car(blb_ctr_idx,:)];
+        blb_ctr_cart = [blb_ctr_cart;visible_cart_v(blb_ctr_idx,:)];
     end
 
     %%
@@ -86,21 +92,5 @@ function blb_cart_v = model_point_reflector(visible_cart_v,bbox)
             blb_cart_v = [blb_cart_v;[visible_cart_v(ptInBlb,1),visible_cart_v(ptInBlb,2),visible_cart_v(ptInBlb,3)]];
         end
         blb_cart_v = unique(blb_cart_v,'row');
-
-%         figure;
-%         scatter3(blb_cart_v(:,1),blb_cart_v(:,2),blb_cart_v(:,3));
-%         title('Blobs');
-        
-        % if IF.plt_3D
-        %     figure;
-        %     scatter3(pt_cart_1(:,1),pt_cart_1(:,2),pt_cart_1(:,3));
-        %     title('Surface of reflection');
-        % end
-
     end
-
-%     clear pt_idx_cart pt_xyz sph_1
-%     clear sph
-%     clear pt_ptr_deg pt_sph_rad 
-%     clear phi_ls_idx theta_ls_idx rho_ls_idx
 end
