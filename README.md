@@ -35,8 +35,8 @@ In [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Guan_Through
 
 ## Contact
 
-    - Please submit issues to our [GitHub](https://github.com/JaydenG1019/HawkEye-Synthesizer) if you found any bugs or have any suggestions
-    - For anything else, send an email at jguan8@illinois.edu
+  - Please submit issues to our [GitHub](https://github.com/JaydenG1019/HawkEye-Synthesizer) if you found any bugs or have any suggestions
+  - For anything else, send an email at jguan8@illinois.edu
 
 
 ## Citation
