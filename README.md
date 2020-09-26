@@ -1,4 +1,6 @@
-# HawkEye Datasetand Radar Data Synthesizer
+# HawkEye Dataset & Radar Data Synthesizer
+3D Millimter-wave radar heatmap dataset of cars collected using our custom-built radar data collection platform.
+Matlab implementation of our FMCW radar data synthesizer. 
 
 <br><br>
 [Through Fog High Resolution Imaging Using Millimeter Wave Radar](https://jaydeng1019.github.io/HawkEye/)  
