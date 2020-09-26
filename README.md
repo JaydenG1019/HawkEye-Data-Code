@@ -1,5 +1,4 @@
-# HawkEye-Synthesizer
-
+# HawkEye Datasetand Radar Data Synthesizer
 
 ## Contact
 
@@ -8,7 +7,7 @@
 
 ## Directory Structure
     .
-    ├── Dataset                         #
+    ├── Dataset                         
       ├── camera                        # RGB camera images
       ├── documentation                 # Document for HawkEye Dataset
       ├── radar                         # 3D mmWave radar heatmaps
@@ -18,8 +17,9 @@
       ├── documentation                 # Document for HawkEye Radar Data Synthesizer
       ├── scripts                       # Various setup scripts for mmwavestudio, etc
         ├── functions    
-          ├── model_point_reflector.m   #           
+          ├── model_point_reflector.m   # model radar point reflectors in the scene          
           ├── radar_dsp.m               # radar signal processing, generating 3D radar heatmaps
+          ├── remove_occlusion.m        # remove occluded body of the car
           ├── simulate_radar_signal.m   # simulate received radar signals in the receiver antenna array  
         ├── main.m                      #
         ├── variable_library.m          # library of various variables
