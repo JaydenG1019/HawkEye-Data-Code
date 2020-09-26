@@ -22,7 +22,7 @@ In [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Guan_Through
           ├── radar_dsp.m               # radar signal processing, generating 3D radar heatmaps
           ├── remove_occlusion.m        # remove occluded body of the car
           ├── simulate_radar_signal.m   # simulate received radar signals in the receiver antenna array  
-        ├── main.m                      #
+        ├── main.m                      # main radar data simulation function
         ├── variable_library.m          # library of various variables
         ├── variable_library_radar.m    # radar configuration related variables
       ├── COPYRIGHT.txt
