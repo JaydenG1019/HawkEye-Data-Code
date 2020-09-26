@@ -6,9 +6,9 @@ Matlab implementation of our radar data synthesizer.
 Junfeng Guan, Sohrab Madani, Suraj Jog, Saurabh Gupta, Haitham Hassanieh
 In [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Guan_Through_Fog_High-Resolution_Imaging_Using_Millimeter_Wave_Radar_CVPR_2020_paper.html).  
 
-<figure>
+<figure class="image">
 <img src="./Dataset/documentation/dataset_showcase.JPG" alt="drawing" width="900" height="300"/>
-<figcaption>Examples of HawkEye Dataset.</figcaption>
+<figcaption>{{Examples of HawkEye Dataset}}</figcaption>
 </figure>
 
 
