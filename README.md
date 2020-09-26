@@ -8,9 +8,7 @@ In [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Guan_Through
 
 <figure class="image">
 <img src="./Dataset/documentation/dataset_showcase.JPG" alt="drawing" width="900" height="300"/>
-<figcaption>{{Examples of HawkEye Dataset}}</figcaption>
 </figure>
-
 
 ## Directory Structure
     .
