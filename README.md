@@ -1,10 +1,13 @@
 # HawkEye Dataset & Radar Data Synthesizer
-3D Millimteer-wave radar heatmap dataset of cars collected using our custom-built radar data collection platform.
-Matlab implementation of our radar data synthesizer.
+HawkEye is a system that leverages a cGAN architecture to recover high-frequency shapes from raw low-resolution mmWave
+heatmaps. It addresses challenges specific to the structure and nature of the radar signals involved. We also develop a data synthesizer to aid with
+large-scale dataset generation for training.
+
+This repository contains the 3D Millimeter-wave radar heatmap dataset of cars used in HawkEye, as well as the Matlab implementation of the radar data synthesizer that is used to generated simulated training dataset for HawkEye.
 <br><br>
 [Through Fog High Resolution Imaging Using Millimeter Wave Radar](https://jaydeng1019.github.io/HawkEye/)  
 Junfeng Guan, Sohrab Madani, Suraj Jog, Saurabh Gupta, Haitham Hassanieh
-In [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Guan_Through_Fog_High-Resolution_Imaging_Using_Millimeter_Wave_Radar_CVPR_2020_paper.html).  
+In [CVPR 2020](https://openaccess.thecvf.com/content_CVPR_2020/html/Guan_Through_Fog_High-Resolution_Imaging_Using_Millimeter_Wave_Radar_CVPR_2020_paper.html). 
 
 <figure class="image">
 <img src="./Dataset/documentation/dataset_showcase.JPG" alt="drawing" width="900" height="325"/>
