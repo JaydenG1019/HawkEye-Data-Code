@@ -5,7 +5,7 @@ function radar_heatmap = radar_dsp(signal_array)
 
     variable_library_radar; % load radar configurations
     
-    range_FFT_array = fft(signal_array,N_FFT,1); % range FFT
+    range_FFT_array = fft(signal_array,N_FFT,1).*repmat(range_bin.',[1,array_size(1),array_size(2)]); % range FFT
     range_FFT_array = range_FFT_array(range_bin_FoV,:,:); % select range bins in the field of view
 
     %% Angle of Arrival Estimation
@@ -18,7 +18,7 @@ function radar_heatmap = radar_dsp(signal_array)
         for kt = 1:N_theta
             Vec = exp(1j*(2*pi*(array_gap(1)*x_idx* cos(phi(kp)) * sin(theta(kt)) + array_gap(2)*z_idx*cos(theta(kt)))/lambda));
             VecR = repmat(Vec,N_rho,1);
-            radar_heatmap(:,kp,kt) = abs(sum(range_FFT_array.*VecR,[2,3]));
+            radar_heatmap(:,kp,kt) = abs(sum(range_FFT_array.*VecR,[2,3])).^2;
         end
     end
 end

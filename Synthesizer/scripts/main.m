@@ -129,7 +129,7 @@ function [radar_heatmap, visible_cart_v] = main
             imagesc(radar_heatmap_top);    
             set(gca,'XDir','reverse')
             set(gca,'YDir','normal')
-            colormap jet; caxis([0 1e4]);
+            colormap jet; caxis([0 1e11]);
             xlabel('Range'); ylabel('Azimuth');
             set(gca,'FontSize',30) % Creates an axes and sets its FontSize to 18
             
@@ -138,7 +138,7 @@ function [radar_heatmap, visible_cart_v] = main
             figure;
             imagesc(radar_heatmap_front.');    
             set(gca,'XDir','reverse')
-            colormap jet; caxis([0 1e4]);
+            colormap jet; caxis([0 1e11]);
             xlabel('Azimuth'); ylabel('Elevation');
             set(gca,'FontSize',30) % Creates an axes and sets its FontSize to 18
         end
