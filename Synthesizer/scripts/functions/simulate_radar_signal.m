@@ -22,7 +22,7 @@ function signal_array = simulate_radar_signal(reflector_cart_v)
         d_RX2reflector = sqrt((array_x_m-reflector_cart_v(kp,1)).^2 + reflector_cart_v(kp,2)^2 + (array_z_m-reflector_cart_v(kp,3)).^2);
         % distance between each RX antenna and the point reflector
         tau(1,:,:) = (d_TX2reflector+d_RX2reflector)/c; % round trip Time of Flight (ToF)
-        pt_signal = exp(1j * 2 * pi * fc * tau).* exp(1j * 2*pi * As * t_matrix .* repmat(tau,[length(tf),1,1])); % beat signal from a single point reflector
+        pt_signal = 1/(d_TX2reflector^2+d_RX2reflector^2)*exp(1j * 2 * pi * fc * tau).* exp(1j * 2*pi * As * t_matrix .* repmat(tau,[length(tf),1,1])); % beat signal from a single point reflector
         signal_array = signal_array + pt_signal; % summing up signals from all point reflector to get the received signal in the antenna array
     end
     
