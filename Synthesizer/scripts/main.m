@@ -33,7 +33,7 @@ function [radar_heatmap, visible_cart_v] = main
         % is the number of points and 3 values are the cartesian coordinates
         % unit is mm
         
-        % Visulize the rotated and translated point cloud
+        % Visulize the original point cloud
 %         figure; 
 %         cart_v_plot = cart_v;
 % %         cart_v_plot = datasample(cart_v, 1000); % downsampling when plotting
