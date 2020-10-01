@@ -2,7 +2,7 @@ N_CAD_car=38; % number of CAD models of cars
 N_placement_car = 10; % # of placement we create with every selected car/group of cars
 
 % angle of rotation for every model
-rotate_ang_coarse = [0:45:315];
+rotate_ang_coarse = [0:15:90];
 rotate_ang_fine = [-5:5];
 rotate_ang = [];
 for k_rotate_ang_fine = rotate_ang_fine

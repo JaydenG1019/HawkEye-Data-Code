@@ -57,6 +57,8 @@ function [radar_heatmap, visible_cart_v] = main
 
             %% Rotate     
             car_scene_v.rotate = rotate_ang(randi(length(rotate_ang))); % randomly select a rotation angle and store it in the pc structure
+            car_scene_v.rotate = mod(car_scene_v.rotate*(randi(1)*2-1),180);
+
             
             % inline function for 2D rotation
             rotate2d =  @(x, M) (x(:, 1:2) * M);
